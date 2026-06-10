@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1f3b73">
+  <meta name="description" content="Application CM1 pour réviser les maths : division euclidienne, dividende, diviseur, quotient et reste.">
+  <title>Études CM1</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <noscript>Cette application nécessite JavaScript.</noscript>
+
+  <header class="app-header">
+    <button id="backBtn" class="ghost hidden" type="button" aria-label="Retour">← Retour</button>
+    <div>
+      <p class="eyebrow">CM1 · Études</p>
+      <h1 id="screenTitle">Tableau de bord</h1>
+    </div>
+  </header>
+
+  <main id="app" class="app-shell">
+    <section id="homeScreen" class="screen active" aria-labelledby="homeTitle">
+      <div class="hero-card">
+        <div>
+          <p class="eyebrow">Dashboard rapide</p>
+          <h2 id="homeTitle">Réviser efficacement, une session à la fois.</h2>
+          <p>Commence par les mathématiques CM1. Les résultats sont conservés sur cet appareil.</p>
+        </div>
+        <div class="hero-stats" id="dashboardStats"></div>
+      </div>
+
+      <h3>Matières</h3>
+      <div class="card-grid subjects-grid">
+        <button class="subject-card enabled" type="button" data-route="maths">
+          <span class="subject-icon">÷</span>
+          <span>
+            <strong>Maths</strong>
+            <small>Division euclidienne</small>
+          </span>
+        </button>
+        <button class="subject-card disabled" type="button" disabled>
+          <span class="subject-icon">Aa</span>
+          <span>
+            <strong>Français</strong>
+            <small>À venir</small>
+          </span>
+        </button>
+        <button class="subject-card disabled" type="button" disabled>
+          <span class="subject-icon">🌍</span>
+          <span>
+            <strong>Questionner le monde</strong>
+            <small>À venir</small>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <section id="mathsScreen" class="screen" aria-labelledby="mathsTitle">
+      <div class="section-heading">
+        <p class="eyebrow">Matière</p>
+        <h2 id="mathsTitle">Maths</h2>
+        <p>Choisis entre apprendre la leçon ou faire une évaluation.</p>
+      </div>
+      <div class="choice-grid">
+        <button class="large-choice" type="button" data-route="lesson">
+          <span>📘</span>
+          <strong>Leçon</strong>
+          <small>Comprendre dividende, diviseur, quotient et reste.</small>
+        </button>
+        <button class="large-choice" type="button" data-route="evaluation">
+          <span>📝</span>
+          <strong>Évaluation</strong>
+          <small>10 exercices aléatoires, sans répétition avant la fin de la banque.</small>
+        </button>
+      </div>
+    </section>
+
+    <section id="lessonScreen" class="screen" aria-labelledby="lessonTitle">
+      <article class="lesson-card">
+        <p class="eyebrow">Leçon de maths</p>
+        <h2 id="lessonTitle">Dividende, diviseur, quotient et reste</h2>
+
+        <div class="lesson-block">
+          <h3>1. Les mots importants</h3>
+          <div class="definition-grid">
+            <div><strong>Dividende</strong><p>Le nombre que l’on partage ou que l’on divise.</p></div>
+            <div><strong>Diviseur</strong><p>Le nombre par lequel on divise.</p></div>
+            <div><strong>Quotient</strong><p>Le résultat entier de la division. On dit aussi « résultat ».</p></div>
+            <div><strong>Reste</strong><p>Ce qui reste quand le partage n’est pas exact.</p></div>
+          </div>
+        </div>
+
+        <div class="lesson-example">
+          <p class="eyebrow">Exemple</p>
+          <h3>37 ÷ 5</h3>
+          <p>5 va 7 fois dans 37, car 5 × 7 = 35. Il reste 2.</p>
+          <div class="formula">37 = 5 × 7 + 2</div>
+          <p><strong>Dividende :</strong> 37 · <strong>Diviseur :</strong> 5 · <strong>Quotient :</strong> 7 · <strong>Reste :</strong> 2</p>
+        </div>
+
+        <div class="lesson-block">
+          <h3>2. Règle à retenir</h3>
+          <p>Dans une division euclidienne, le reste doit toujours être plus petit que le diviseur.</p>
+          <div class="formula">dividende = diviseur × quotient + reste</div>
+        </div>
+
+        <div class="lesson-block">
+          <h3>3. Méthode</h3>
+          <ol>
+            <li>Cherche combien de fois le diviseur rentre dans le dividende.</li>
+            <li>Multiplie le diviseur par le quotient trouvé.</li>
+            <li>Soustrais pour trouver le reste.</li>
+            <li>Vérifie que le reste est plus petit que le diviseur.</li>
+          </ol>
+        </div>
+
+        <div class="action-row">
+          <button class="primary" type="button" data-route="evaluation">Faire une évaluation</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="evaluationScreen" class="screen" aria-labelledby="evaluationTitle">
+      <div class="section-heading">
+        <p class="eyebrow">Évaluation</p>
+        <h2 id="evaluationTitle">Choisis un niveau</h2>
+        <p>Chaque session contient 10 exercices. La banque d’exercices d’un niveau est parcourue sans répétition avant de recommencer.</p>
+      </div>
+
+      <div class="difficulty-grid">
+        <button class="difficulty-card" type="button" data-difficulty="easy">
+          <span class="badge">Facile</span>
+          <strong>Diviseur à 1 chiffre</strong>
+          <small>Dividende jusqu’à 3 chiffres.</small>
+          <span class="progress-line" id="progress-easy"></span>
+        </button>
+        <button class="difficulty-card" type="button" data-difficulty="medium">
+          <span class="badge">Moyen</span>
+          <strong>Diviseur à 2 chiffres</strong>
+          <small>Dividendes variés, non limités à 3 chiffres.</small>
+          <span class="progress-line" id="progress-medium"></span>
+        </button>
+        <button class="difficulty-card" type="button" data-difficulty="hard">
+          <span class="badge">Difficile</span>
+          <strong>Diviseur à 3 chiffres</strong>
+          <small>Dividendes variés, non limités à 3 chiffres.</small>
+          <span class="progress-line" id="progress-hard"></span>
+        </button>
+      </div>
+
+      <div class="secondary-panel">
+        <h3>Statistiques globales</h3>
+        <div id="globalStats" class="stats-grid"></div>
+        <button id="resetStatsBtn" class="danger ghost" type="button">Réinitialiser les statistiques</button>
+      </div>
+    </section>
+
+    <section id="exerciseScreen" class="screen" aria-labelledby="exerciseTitle">
+      <div class="session-topbar">
+        <div>
+          <p class="eyebrow" id="difficultyLabel">Évaluation</p>
+          <h2 id="exerciseTitle">Exercice</h2>
+        </div>
+        <div class="pill" id="exerciseCounter">1 / 10</div>
+      </div>
+
+      <div class="progress-track" aria-hidden="true"><span id="sessionProgress"></span></div>
+
+      <article class="exercise-card">
+        <p id="questionText" class="question-text"></p>
+        <div class="division-box" id="divisionBox"></div>
+
+        <form id="answerForm" class="answer-form">
+          <label>
+            Quotient / résultat
+            <input id="quotientInput" type="number" inputmode="numeric" required>
+          </label>
+          <label>
+            Reste
+            <input id="remainderInput" type="number" inputmode="numeric" min="0" required>
+          </label>
+          <button id="checkBtn" class="primary" type="submit">Valider</button>
+        </form>
+
+        <div id="feedback" class="feedback hidden" role="status"></div>
+        <div class="action-row hidden" id="nextActionRow">
+          <button id="nextBtn" class="primary" type="button">Exercice suivant</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="resultsScreen" class="screen" aria-labelledby="resultsTitle">
+      <div class="results-hero">
+        <p class="eyebrow">Résultats</p>
+        <h2 id="resultsTitle">Session terminée</h2>
+        <div id="scoreSummary" class="score-summary"></div>
+      </div>
+
+      <div class="secondary-panel">
+        <h3>Explications</h3>
+        <div id="correctionList" class="correction-list"></div>
+      </div>
+
+      <div class="secondary-panel">
+        <h3>Statistiques</h3>
+        <div id="sessionStats" class="stats-grid"></div>
+      </div>
+
+      <div class="action-row">
+        <button id="retrySameBtn" class="primary" type="button">Nouvelle session même niveau</button>
+        <button class="ghost" type="button" data-route="evaluation">Changer de niveau</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
